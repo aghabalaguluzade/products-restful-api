@@ -1,2 +1,1 @@
-# products-restful-api
-#Prodcuts Rest API
+# Prodcuts Rest API
