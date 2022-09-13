@@ -1,9 +1,12 @@
 const express = require("express");
-const productsRouter = require("./routes/products");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const conn = require("./server");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+const productsRouter = require("./routes/products");
+const authRouter = require("./routes/auth");
+const verifyToken = require("./middleware/verifyToken");
 
 const app = express();
 
@@ -12,7 +15,10 @@ conn();
 
 //app.use()
 app.use(bodyParser.json());
-app.use("/products" ,productsRouter);
+app.use(bodyParser.urlencoded({ extended : true }));
+app.use("/products", verifyToken, productsRouter);
+app.use("/auth",authRouter);
+app.use(cors());
 
 app.get("/", (req,res) => {
      res.send("HELLO WORLD!");

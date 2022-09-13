@@ -1,11 +1,9 @@
 const Product = require("../models/Product");
 
 const productCreate = async (req,res) => {
-     const product = new Product({
-          name: req.body.name,
-          description: req.body.description,
-          price: req.body.price
-     });
+     const { name, description, price } = req.body;
+     const user = req.userId;
+     const product = new Product({ name, description, price, user });
      try {
           const saveProduct = await product.save();
           res.json(saveProduct);
