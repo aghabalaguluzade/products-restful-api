@@ -5,7 +5,7 @@ function verifyToken(req,res,next) {
      if(!authorization) {
           res.status(401).send("Access denied. No token provided");
           return;
-     }
+     };
      const token = authorization.split(" ")[1];
      jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
           if(err) {
